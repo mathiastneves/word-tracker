@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href=".static/styles.css">
+        <link rel="stylesheet" href="./static/styles.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Word Tracker</title>
     </head>
     <body>
         <div class="header">
-            <p>Francisco: <span class="total">8 words</span></p>
-            <p>2 years and 5 months</p>
+            <p>{{ name }}: <span class="total">{{ total }} words</span></p>
+            <p>Age: <span class="total">{{ age }} months</span></p>
         </div>
-        
-        <form class="word-form">
-            <label>Add New Word</label>
-            <input type="text">
+
+        <h2 class="header-month">New Word</h2>
+        <form class="word-form" action="/" method="post">
+            <label for="word">Word</label>
+            <input type="text" id="word" name="word">
+            <label for="age">Date</label>
+            <input type="date" id="months" name="months">
             <input type="submit" class="button">
         </form>
 
@@ -21,40 +24,14 @@
             <table class="table table-striped d-flex justify-content-center">
                 <tr>
                     <th scope="col">Word</th>
-                    <th scope="col">Month</th>
+                    <th scope="col">Age</th>
                 </tr>
-                <tr>
-                    <td>Mama</td>
-                    <td>9 months</td>
-                </tr>
-                <tr>
-                    <td>Papa</td>
-                    <td>9 months</td>
-                </tr>
-                <tr>
-                    <td>Dog</td>
-                    <td>10 months</td>
-                </tr>
-                <tr>
-                    <td>Cat</td>
-                    <td>10 months</td>
-                </tr>
-                <tr>
-                    <td>Ice</td>
-                    <td>10 months</td>
-                </tr>
-                <tr>
-                    <td>Foo</td>
-                    <td>11 months</td>
-                </tr>
-                <tr>
-                    <td>Bar</td>
-                    <td>11 months</td>
-                </tr>
-                <tr>
-                    <td>Bas</td>
-                    <td>12 months</td>
-                </tr>
+                    {% for row in words %}
+                    <tr>
+                        <td>{{ row.word }}</td>
+                        <td>{{ row.months }} months</td>
+                    </tr>
+                {% endfor %}
             </table>
     </body>
 </html>
