@@ -9,7 +9,7 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.table-striped > tbody > tr:nth-child(odd)>td, 
+.table-striped > tbody > tr:nth-child(odd)>td,
 .table-striped > tbody > tr:nth-child(odd)>th {
    background-color:  #B9FFF8;
  }
