@@ -1,6 +1,5 @@
 # Word Tracker
 #### Video Demo:  <https://studio.youtube.com/video/6dNxK1eDzoM/>
-#### Description:
 
 ## INTRODUCTION
 Word tracker allows parents to track new words spoken by babies/toddlers and when they started speaking them.
