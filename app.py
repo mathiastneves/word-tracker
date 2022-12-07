@@ -1,6 +1,4 @@
-import os
-
-from cs50 import SQL
+import sqlite3
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from datetime import datetime
 from datetime import date
@@ -11,8 +9,9 @@ app = Flask(__name__)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///word-tracker.db")
+# Connect with database
+con = sqlite3.connect("word-tracker.db", check_same_thread=False)
+db = con.cursor()
 
 #SET DOB
 dob = '2020-05-12'
@@ -36,16 +35,22 @@ def index():
         new_date = datetime.strptime(date, '%Y-%m-%d').date()
         months = (new_date.year - new_dob.year) * 12 + (new_date.month - new_dob.month)
 
-        db.execute("INSERT INTO words (word,months) VALUES (?,?)", word, months)
+        #Using placeholders help avoid SQL injection attacks
+        data = [(word, months)]
+
+        db.executemany("INSERT INTO words (word,months) VALUES (?,?)", data)
+        con.commit()
 
         return redirect("/")
 
     else:
 
         #Query for all words
-        words = db.execute("SELECT * FROM words ORDER BY months DESC")
+        db.execute("SELECT * FROM words ORDER BY months DESC")
+        words = db.fetchall()
+        
         total = db.execute("SELECT COUNT(word) FROM words")
-        total = total[0]['COUNT(word)']
+        total = total.fetchall()[0][0]
         return render_template("index.html", words=words, total=total, age=age, name=name)
 
 

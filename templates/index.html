@@ -28,8 +28,8 @@
                 </tr>
                     {% for row in words %}
                     <tr>
-                        <td>{{ row.word }}</td>
-                        <td>{{ row.months }} months</td>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }} months</td>
                     </tr>
                 {% endfor %}
             </table>
